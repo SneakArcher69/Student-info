@@ -48,9 +48,6 @@ def flowz(string):
 def green(string):
     return colored(string, "green", attrs=['bold'])
 
-def white(string):
-    return colored(string, "white", attrs=['bold'])
-
 def yellow(string):
     return colored(string, "yellow", attrs=['bold'])
 
@@ -79,7 +76,7 @@ def border_msg(msg):
     m = ''.join(['        +'] + ['-' * row] + ['+'])
     h = cyan(m)
     result = h + '\n' + \
-        cyan("        |") + white(msg) + \
+        cyan("        |") + (msg) + \
         cyan("|") + '\n' + h
     flow((result))
     print()
@@ -97,14 +94,14 @@ smb = {
 # Choice menu
 def display_menu():
     flow("\n" + smb["ARROW"] + cyan("CHOOSE AN OPTION :") + "\n\n")
-    print(smb["ARROW"] + yellow("[1] ") + white("Add New Student"))
-    print(smb["ARROW"] + yellow("[2] ") + white("Remove Student"))
-    print(smb["ARROW"] + yellow("[3] ") + white("Erase all records"))
-    print(smb["ARROW"] + yellow("[4] ") + white("Search Record"))
-    print(smb["ARROW"] + yellow("[5] ") + white("View all Records"))
-    print(smb["ARROW"] + yellow("[6] ") + white("Sort Records"))
-    print(smb["ARROW"] + yellow("[7] ") + white("Quit Program"))
-    print(smb["ARROW"] + yellow("[8] ") + white("About Developers"))
+    print(smb["ARROW"] + yellow("[1] ") + ("Add New Student"))
+    print(smb["ARROW"] + yellow("[2] ") + ("Remove Student"))
+    print(smb["ARROW"] + yellow("[3] ") + ("Erase all records"))
+    print(smb["ARROW"] + yellow("[4] ") + ("Search Record"))
+    print(smb["ARROW"] + yellow("[5] ") + ("View all Records"))
+    print(smb["ARROW"] + yellow("[6] ") + ("Sort Records"))
+    print(smb["ARROW"] + yellow("[7] ") + ("Quit Program"))
+    print(smb["ARROW"] + yellow("[8] ") + ("About Developers"))
 
 
 # For clearing screen
