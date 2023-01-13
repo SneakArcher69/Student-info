@@ -6,7 +6,6 @@ import shelve
 import winsound
 import warnings
 import mysql.connector as sql
-from dateutil import parser
 from tabulate import tabulate
 from termcolor import colored
 from datetime import datetime
@@ -48,9 +47,6 @@ def flowz(string):
 def green(string):
     return colored(string, "green", attrs=['bold'])
 
-def white(string):
-    return colored(string, "white", attrs=['bold'])
-
 def yellow(string):
     return colored(string, "yellow", attrs=['bold'])
 
@@ -79,7 +75,7 @@ def border_msg(msg):
     m = ''.join(['        +'] + ['-' * row] + ['+'])
     h = cyan(m)
     result = h + '\n' + \
-        cyan("        |") + white(msg) + \
+        cyan("        |") + (msg) + \
         cyan("|") + '\n' + h
     flow((result))
     print()
@@ -97,22 +93,19 @@ smb = {
 # Choice menu
 def display_menu():
     flow("\n" + smb["ARROW"] + cyan("CHOOSE AN OPTION :") + "\n\n")
-    print(smb["ARROW"] + yellow("[1] ") + white("Add New Student"))
-    print(smb["ARROW"] + yellow("[2] ") + white("Remove Student"))
-    print(smb["ARROW"] + yellow("[3] ") + white("Erase all records"))
-    print(smb["ARROW"] + yellow("[4] ") + white("Search Record"))
-    print(smb["ARROW"] + yellow("[5] ") + white("View all Records"))
-    print(smb["ARROW"] + yellow("[6] ") + white("Sort Records"))
-    print(smb["ARROW"] + yellow("[7] ") + white("Quit Program"))
-    print(smb["ARROW"] + yellow("[8] ") + white("About Developers"))
+    print(smb["ARROW"] + yellow("[1] ") + ("Add New Student"))
+    print(smb["ARROW"] + yellow("[2] ") + ("Remove Student"))
+    print(smb["ARROW"] + yellow("[3] ") + ("Erase all records"))
+    print(smb["ARROW"] + yellow("[4] ") + ("Search Record"))
+    print(smb["ARROW"] + yellow("[5] ") + ("View all Records"))
+    print(smb["ARROW"] + yellow("[6] ") + ("Sort Records"))
+    print(smb["ARROW"] + yellow("[7] ") + ("Quit Program"))
+    print(smb["ARROW"] + yellow("[8] ") + ("About Developers"))
 
 
 # For clearing screen
 def clr_scr():
-    if os.name == 'posix':
-        _ = os.system('clear')
-    else:
-        _ = os.system('cls')
+    _ = os.system('cls')
 
 def qui():
     print()
@@ -126,7 +119,12 @@ def qui():
 
 # Connecting to MySQL instance
 def connect():
-    config=shelve.open('config')
+    qwerty=os.path.exists(r'.\config')
+    if qwerty:
+        pass
+    else:
+        os.makedirs(r'.\config')
+    config=shelve.open(r'config\config')
     while True:
         try:
             try:
@@ -278,7 +276,7 @@ def DOB():
         string= date[-4:] + "-" + date[3:5] + "-" + date[:2]
         return string
     else:
-        print(smb["INFO"] + yellow(f"Year can't be lower than {lowerbound} and can't be higher than {upperbound}"))
+        print(smb["INFO"] + yellow(f"Year can't be lower than {lowerbound+1} and can't be higher than {upperbound-1}"))
         return None
 # For entering and validating class
 def clas_():
@@ -329,7 +327,7 @@ def phone_():
         return None
     cursor.execute("select phone from student_Record")
     reg_ = cursor.fetchall()
-    tup_ = ('00966'+phone[1:],)
+    tup_ = ('+966'+phone[1:],)
     if tup_ not in reg_:
         confirm = True
     else:
@@ -340,7 +338,7 @@ def phone_():
         return None
     if check_(phone) == True and confirm == True:
         phone = phone[1:]
-        phone = '00966'+phone
+        phone = '+966'+phone
         return phone
     else:
         beep()
@@ -807,7 +805,7 @@ def about():
     pprint("Mr Qurban Khan")
     pprint("XII B05")
     pprint("Muhammed Nabeel")
-    pprint("Abdulla Shihavudeen")
+    pprint("Abdullah Shihavudeen")
     pprint("Sayed Afnan")
     pprint("All Rights to Nabs™ 2023 ©")
     print()
@@ -886,7 +884,7 @@ def start():
     clr_scr()
     connect()
     table()
-    border_msg(" Welcome To Student Information System ! ")
+    border_msg(" Welcome To Student Information System")
 
 # Finally calling the functions
 start()
