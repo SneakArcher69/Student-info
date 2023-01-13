@@ -6,7 +6,6 @@ import shelve
 import winsound
 import warnings
 import mysql.connector as sql
-from dateutil import parser
 from tabulate import tabulate
 from termcolor import colored
 from datetime import datetime
@@ -106,10 +105,7 @@ def display_menu():
 
 # For clearing screen
 def clr_scr():
-    if os.name == 'posix':
-        _ = os.system('clear')
-    else:
-        _ = os.system('cls')
+    _ = os.system('cls')
 
 def qui():
     print()
@@ -123,7 +119,12 @@ def qui():
 
 # Connecting to MySQL instance
 def connect():
-    config=shelve.open('config')
+    qwerty=os.path.exists(r'.\config')
+    if qwerty:
+        pass
+    else:
+        os.makedirs(r'.\config')
+    config=shelve.open(r'config\config')
     while True:
         try:
             try:
@@ -275,7 +276,7 @@ def DOB():
         string= date[-4:] + "-" + date[3:5] + "-" + date[:2]
         return string
     else:
-        print(smb["INFO"] + yellow(f"Year can't be lower than {lowerbound} and can't be higher than {upperbound}"))
+        print(smb["INFO"] + yellow(f"Year can't be lower than {lowerbound+1} and can't be higher than {upperbound-1}"))
         return None
 # For entering and validating class
 def clas_():
@@ -326,7 +327,7 @@ def phone_():
         return None
     cursor.execute("select phone from student_Record")
     reg_ = cursor.fetchall()
-    tup_ = ('00966'+phone[1:],)
+    tup_ = ('+966'+phone[1:],)
     if tup_ not in reg_:
         confirm = True
     else:
@@ -337,7 +338,7 @@ def phone_():
         return None
     if check_(phone) == True and confirm == True:
         phone = phone[1:]
-        phone = '00966'+phone
+        phone = '+966'+phone
         return phone
     else:
         beep()
@@ -804,7 +805,7 @@ def about():
     pprint("Mr Qurban Khan")
     pprint("XII B05")
     pprint("Muhammed Nabeel")
-    pprint("Abdulla Shihavudeen")
+    pprint("Abdullah Shihavudeen")
     pprint("Sayed Afnan")
     pprint("All Rights to Nabs™ 2023 ©")
     print()
@@ -883,7 +884,7 @@ def start():
     clr_scr()
     connect()
     table()
-    border_msg(" Welcome To Student Information System ! ")
+    border_msg(" Welcome To Student Information System")
 
 # Finally calling the functions
 start()
