@@ -799,7 +799,6 @@ def pprint(string):
 
 # Developer credits
 def about():
-    winsound.PlaySound(r"./sfx/outro.wav", winsound.SND_FILENAME | winsound.SND_ASYNC)
     print("***********************************************************************".center(120))
     pprint("INTERNATIONAL INDIAN SCHOOL JEDDAH")
     pprint("Mr Qurban Khan")
@@ -812,7 +811,6 @@ def about():
     print()
     print()
     print("***********************************************************************".center(120))
-    winsound.PlaySound(None, winsound.SND_ASYNC)
     time.sleep(3)
     clr_scr()
 
