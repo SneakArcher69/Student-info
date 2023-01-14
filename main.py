@@ -792,15 +792,17 @@ def quitz():
 
 # For printing developer credits stylishly
 def pprint(string):
-    for i in range(1, 3):
-        time.sleep(0.2)
-        print('')
+    if string != "Mr Qurban Khan":
+        for i in range(1, 3):
+            time.sleep(0.2)
+            print('')
     flowz(string.center(120))
 
 # Developer credits
 def about():
     print("***********************************************************************".center(120))
     pprint("INTERNATIONAL INDIAN SCHOOL JEDDAH")
+    pprint("Made under the supervision of")
     pprint("Mr Qurban Khan")
     pprint("XII B05")
     pprint("Muhammed Nabeel")
