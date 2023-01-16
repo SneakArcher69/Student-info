@@ -801,6 +801,7 @@ def pprint(string):
 def about():
     print("***********************************************************************".center(120))
     pprint("INTERNATIONAL INDIAN SCHOOL JEDDAH")
+    pprint("Made under the Supervision of")
     pprint("Mr Qurban Khan")
     pprint("XII B05")
     pprint("Muhammed Nabeel")
